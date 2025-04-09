@@ -31,17 +31,3 @@ def guardar_soluciones(n, soluciones, archivo_csv):
 
     print(f"Soluciones para n = {n} guardadas correctamente.")
 
-# Ejemplo de uso
-if __name__ == "__main__":
-    # Número de reinas
-    n = 8
-    # Ejemplo de soluciones (puedes reemplazarlo con las soluciones reales)
-    soluciones = [
-        "[0, 4, 7, 5, 2, 6, 1, 3]",
-        "[0, 5, 7, 2, 6, 3, 1, 4]"
-    ]
-    # Ruta del archivo CSV
-    archivo_csv = "soluciones_reinas.csv"
-
-    # Guardar las soluciones
-    guardar_soluciones(n, soluciones, archivo_csv)
