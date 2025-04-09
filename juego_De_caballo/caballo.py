@@ -9,6 +9,7 @@ class ProblemaCaballo:
             (-2, -1), (-1, -2), (1, -2), (2, -1)
         ]
         self.tablero = [[-1 for _ in range(N)] for _ in range(N)]
+        self.recorrido = []  # Lista para guardar el recorrido del caballo
 
     def es_valido(self, x, y):
         """Verifica si la posición está dentro del tablero y no ha sido visitada."""
@@ -22,17 +23,21 @@ class ProblemaCaballo:
         :param paso: Número del paso actual
         :return: True si se encuentra una solución, False en caso contrario
         """
-        if paso == self.N * self.N:
+        self.tablero[x][y] = paso  # Marcar la casilla como visitada
+        self.recorrido.append((x, y))  # Guardar la posición actual
+
+        if paso == self.N * self.N - 1:
             return True  # Todas las casillas han sido visitadas
 
         for dx, dy in self.movimientos_caballo:
             nx, ny = x + dx, y + dy
             if self.es_valido(nx, ny):
-                self.tablero[nx][ny] = paso  # Marcar la casilla como visitada
                 if self.resolver_caballo(nx, ny, paso + 1):
                     return True
-                self.tablero[nx][ny] = -1  # Desmarcar (backtracking)
 
+        # Backtracking: desmarcar la casilla y eliminar la posición del recorrido
+        self.tablero[x][y] = -1
+        self.recorrido.pop()
         return False
 
     def resolver(self, inicio_x=0, inicio_y=0):
@@ -42,12 +47,8 @@ class ProblemaCaballo:
         :param inicio_y: Posición inicial en el eje Y
         :return: Tablero con la solución o None si no hay solución
         """
-        self.tablero[inicio_x][inicio_y] = 0  # Paso inicial
-        if self.resolver_caballo(inicio_x, inicio_y, 1):
+        if self.resolver_caballo(inicio_x, inicio_y, 0):
             return self.tablero
         else:
             print("No se encontró solución.")
             return None
-
-    def imprimir_tablero(self):
-        """Imprime el tablero."""
