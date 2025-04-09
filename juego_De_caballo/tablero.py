@@ -1,9 +1,9 @@
-from juego_De_caballo.caballo import caballo
+from juego_De_caballo.caballo import ProblemaCaballo
 
 class TableroVisual:
     def __init__(self, N=8):
         self.N = N
-        self.problema_caballo = caballo(N)
+        self.problema_caballo = ProblemaCaballo(N)
 
     def mostrar_tablero(self, tablero):
         """Muestra el tablero con el recorrido del caballo."""
@@ -18,12 +18,3 @@ class TableroVisual:
             self.mostrar_tablero(self.problema_caballo.tablero)
         else:
             print("No se encontró una solución para el recorrido del caballo.")
-
-# Ejemplo de uso
-if __name__ == "__main__":
-    import random
-    inicio_x = random.randint(0, 7)
-    inicio_y = random.randint(0, 7)
-    print(f"Posición inicial del caballo: ({inicio_x}, {inicio_y})")
-    tablero_visual = TableroVisual()
-    tablero_visual.ejecutar(inicio_x, inicio_y)
