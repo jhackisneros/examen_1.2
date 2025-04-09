@@ -22,17 +22,27 @@ def juego_de_reinas():
     archivo_csv = "soluciones_reinas.csv"
     guardar_soluciones(N, soluciones, archivo_csv)
 
-def juego_adicional():
-    print("¡Bienvenido al problema adicional!")
-    # Aquí puedes implementar la lógica para el tercer problema
-    print("Este es un espacio reservado para el tercer juego/problema.")
+def mover_torre(n, origen, destino, auxiliar):
+    """Resuelve el problema de la Torre de Hanoi recursivamente."""
+    if n == 1:
+        print(f"Mover disco de {origen} a {destino}")
+    else:
+        mover_torre(n - 1, origen, auxiliar, destino)
+        print(f"Mover disco de {origen} a {destino}")
+        mover_torre(n - 1, auxiliar, destino, origen)
+
+def juego_torre_hanoi():
+    print("¡Bienvenido al problema de la Torre de Hanoi!")
+    n = int(input("Introduce el número de discos: "))
+    print("Los movimientos necesarios son:")
+    mover_torre(n, "A", "C", "B")
 
 if __name__ == "__main__":
     while True:
         print("\nSeleccione el juego/problema que desea resolver:")
         print("1. Problema del caballo")
         print("2. Problema de las n-reinas")
-        print("3. Problema adicional")
+        print("3. Problema de la Torre de Hanoi")
         print("4. Salir")
         opcion = input("Ingrese el número de su elección: ")
 
@@ -41,7 +51,7 @@ if __name__ == "__main__":
         elif opcion == "2":
             juego_de_reinas()
         elif opcion == "3":
-            juego_adicional()
+            juego_torre_hanoi()
         elif opcion == "4":
             print("¡Gracias por jugar!")
             break

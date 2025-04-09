@@ -1,3 +1,5 @@
+from juego_reina.guardarsoluciones import guardar_soluciones
+
 def resolver_n_reinas(N):
     soluciones = []
     tablero = [-1] * N  # tablero[i] = columna de la reina en la fila i
@@ -22,6 +24,12 @@ def resolver_n_reinas(N):
     backtrack(0)
     return soluciones
 
-# Ejemplo: mostrar soluciones para N=8
-sols = resolver_n_reinas(int(input("Introduce el tamaño del tablero (N): ")))
-print(f"Se encontraron {len(sols)} soluciones")
+if __name__ == "__main__":
+    N = int(input("Introduce el tamaño del tablero (N): "))
+    soluciones = resolver_n_reinas(N)
+    print(f"Se encontraron {len(soluciones)} soluciones")
+
+    # Guardar las soluciones en el archivo CSV
+    guardar_soluciones(N, soluciones)
+
+ 
