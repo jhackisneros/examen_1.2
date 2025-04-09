@@ -22,12 +22,18 @@ def juego_de_reinas():
     archivo_csv = "soluciones_reinas.csv"
     guardar_soluciones(N, soluciones, archivo_csv)
 
+def juego_adicional():
+    print("¡Bienvenido al problema adicional!")
+    # Aquí puedes implementar la lógica para el tercer problema
+    print("Este es un espacio reservado para el tercer juego/problema.")
+
 if __name__ == "__main__":
     while True:
-        print("\nSeleccione el juego que desea jugar:")
+        print("\nSeleccione el juego/problema que desea resolver:")
         print("1. Problema del caballo")
         print("2. Problema de las n-reinas")
-        print("3. Salir")
+        print("3. Problema adicional")
+        print("4. Salir")
         opcion = input("Ingrese el número de su elección: ")
 
         if opcion == "1":
@@ -35,6 +41,8 @@ if __name__ == "__main__":
         elif opcion == "2":
             juego_de_reinas()
         elif opcion == "3":
+            juego_adicional()
+        elif opcion == "4":
             print("¡Gracias por jugar!")
             break
         else:
