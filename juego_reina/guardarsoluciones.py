@@ -1,32 +1,47 @@
 import csv
+import os
 
-def guardar_soluciones(nombre_archivo, soluciones):
+def guardar_soluciones(n, soluciones, archivo_csv):
     """
-    Guarda las soluciones del problema de las n-reinas en un archivo CSV.
+    Guarda las soluciones en un archivo CSV, evitando duplicados para un número específico de reinas.
 
-    :param nombre_archivo: Nombre del archivo CSV donde se guardarán las soluciones.
-    :param soluciones: Diccionario con las soluciones. Ejemplo:
-                       {
-                           4: [[1, 3, 0, 2], [2, 0, 3, 1]],
-                           5: [[0, 2, 4, 1, 3]]
-                       }
+    :param n: Número de reinas.
+    :param soluciones: Lista de soluciones para el problema de las n-reinas.
+    :param archivo_csv: Ruta del archivo CSV donde se guardarán las soluciones.
     """
-    with open(nombre_archivo, mode='w', newline='', encoding='utf-8') as archivo_csv:
-        escritor = csv.writer(archivo_csv)
-        # Escribir encabezados
-        escritor.writerow(['n-reinas', 'soluciones distintas', 'todas las soluciones', 'una solución'])
+    # Verificar si el archivo CSV ya existe
+    if os.path.exists(archivo_csv):
+        with open(archivo_csv, mode='r', newline='', encoding='utf-8') as archivo:
+            lector = csv.reader(archivo)
+            # Leer los números de reinas ya guardados
+            n_guardados = {int(fila[0]) for fila in lector if fila}
+    else:
+        n_guardados = set()
 
-        for n, lista_soluciones in soluciones.items():
-            num_soluciones = len(lista_soluciones)
-            todas_las_soluciones = '; '.join(map(str, lista_soluciones))
-            una_solucion = lista_soluciones[0] if num_soluciones == 1 else ''
-            escritor.writerow([n, num_soluciones, todas_las_soluciones, una_solucion])
+    # Si ya existen soluciones para este número de reinas, no guardar de nuevo
+    if n in n_guardados:
+        print(f"Las soluciones para n = {n} ya están guardadas.")
+        return
+
+    # Guardar las nuevas soluciones en el archivo CSV
+    with open(archivo_csv, mode='a', newline='', encoding='utf-8') as archivo:
+        escritor = csv.writer(archivo)
+        for solucion in soluciones:
+            escritor.writerow([n, solucion])
+
+    print(f"Soluciones para n = {n} guardadas correctamente.")
 
 # Ejemplo de uso
-soluciones_ejemplo = {
-    4: [[1, 3, 0, 2], [2, 0, 3, 1]],
-    5: [[0, 2, 4, 1, 3]],
-    6: [[1, 3, 5, 0, 2, 4]]
-}
+if __name__ == "__main__":
+    # Número de reinas
+    n = 8
+    # Ejemplo de soluciones (puedes reemplazarlo con las soluciones reales)
+    soluciones = [
+        "[0, 4, 7, 5, 2, 6, 1, 3]",
+        "[0, 5, 7, 2, 6, 3, 1, 4]"
+    ]
+    # Ruta del archivo CSV
+    archivo_csv = "soluciones_reinas.csv"
 
-guardar_soluciones('soluciones_n_reinas.csv', soluciones_ejemplo)
+    # Guardar las soluciones
+    guardar_soluciones(n, soluciones, archivo_csv)

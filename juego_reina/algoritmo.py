@@ -25,5 +25,3 @@ def resolver_n_reinas(N):
 # Ejemplo: mostrar soluciones para N=8
 sols = resolver_n_reinas(int(input("Introduce el tamaño del tablero (N): ")))
 print(f"Se encontraron {len(sols)} soluciones")
-for s in sols[:3]:  # Muestra solo las 3 primeras
-    print(s)
