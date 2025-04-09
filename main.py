@@ -18,6 +18,11 @@ def juego_de_reinas():
     soluciones = resolver_n_reinas(N)
     print(f"Se encontraron {len(soluciones)} soluciones")
 
+    # Guardar las soluciones en un archivo
+    with open("soluciones_reinas.txt", "w") as archivo:
+        for solucion in soluciones:
+            archivo.write(f"{solucion}\n")
+    print("Las soluciones se han guardado en 'soluciones_reinas.txt'.")
 
 def problema_de_hanoi():
     print("¡Bienvenido al problema de la Torre de Hanoi!")

@@ -32,21 +32,3 @@ def resolver_n_reinas(N):
     backtrack(0)
     return soluciones
 
-def guardar_soluciones_csv(soluciones, nombre_archivo):
-    """
-    Guarda la lista de soluciones en un archivo CSV.
-    Cada fila del CSV representa una solución, donde cada columna indica
-    la posición (columna) en la que se colocó la reina en la fila correspondiente.
-    """
-    # Determina la ruta para guardar el CSV en la misma carpeta que este módulo
-    ruta_archivo = os.path.join(os.path.dirname(__file__), nombre_archivo)
-    with open(ruta_archivo, mode='w', newline='', encoding='utf-8') as archivo:
-        writer = csv.writer(archivo)
-        # Escribe una cabecera opcional (puedes modificarla o eliminarla)
-        if soluciones:
-            N = len(soluciones[0])
-            cabecera = [f"Fila{i}" for i in range(N)]
-            writer.writerow(cabecera)
-        # Escribe cada solución en una línea del CSV
-        for sol in soluciones:
-            writer.writerow(sol)
