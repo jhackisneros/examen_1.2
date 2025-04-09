@@ -1,6 +1,5 @@
 from juego_De_caballo.tablero import TableroVisual
 from juego_reina.algoritmo import resolver_n_reinas
-from juego_reina.guardarsoluciones import guardar_soluciones
 from juego_torre_De_hanoi.hanoi import TorreDeHanoi  # Importa la clase TorreDeHanoi
 import random
 
@@ -19,9 +18,6 @@ def juego_de_reinas():
     soluciones = resolver_n_reinas(N)
     print(f"Se encontraron {len(soluciones)} soluciones")
 
-    # Guardar las soluciones en el archivo CSV
-    archivo_csv = "soluciones_reinas.csv"
-    guardar_soluciones(N, soluciones, archivo_csv)
 
 def problema_de_hanoi():
     print("¡Bienvenido al problema de la Torre de Hanoi!")
