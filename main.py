@@ -1,6 +1,7 @@
 from juego_De_caballo.tablero import TableroVisual
 from juego_reina.algoritmo import resolver_n_reinas
 from juego_reina.guardarsoluciones import guardar_soluciones
+from juego_torre_De_hanoi.hanoi import TorreDeHanoi  # Importa la clase TorreDeHanoi
 import random
 
 def juego_de_caballo():
@@ -22,20 +23,14 @@ def juego_de_reinas():
     archivo_csv = "soluciones_reinas.csv"
     guardar_soluciones(N, soluciones, archivo_csv)
 
-def mover_torre(n, origen, destino, auxiliar):
-    """Resuelve el problema de la Torre de Hanoi recursivamente."""
-    if n == 1:
-        print(f"Mover disco de {origen} a {destino}")
-    else:
-        mover_torre(n - 1, origen, auxiliar, destino)
-        print(f"Mover disco de {origen} a {destino}")
-        mover_torre(n - 1, auxiliar, destino, origen)
-
-def juego_torre_hanoi():
+def problema_de_hanoi():
     print("¡Bienvenido al problema de la Torre de Hanoi!")
-    n = int(input("Introduce el número de discos: "))
-    print("Los movimientos necesarios son:")
-    mover_torre(n, "A", "C", "B")
+    num_discos = int(input("Ingrese el número de discos: "))
+    hanoi = TorreDeHanoi(num_discos)
+    print("\nEstado inicial de los palos:")
+    hanoi.mostrar_palos()
+    hanoi.resolver()
+    hanoi.imprimir_movimientos()
 
 if __name__ == "__main__":
     while True:
@@ -46,14 +41,17 @@ if __name__ == "__main__":
         print("4. Salir")
         opcion = input("Ingrese el número de su elección: ")
 
-        if opcion == "1":
-            juego_de_caballo()
-        elif opcion == "2":
-            juego_de_reinas()
-        elif opcion == "3":
-            juego_torre_hanoi()
-        elif opcion == "4":
-            print("¡Gracias por jugar!")
-            break
+        if opcion.isdigit():
+            if opcion == "1":
+                juego_de_caballo()
+            elif opcion == "2":
+                juego_de_reinas()
+            elif opcion == "3":
+                problema_de_hanoi()
+            elif opcion == "4":
+                print("¡Gracias por jugar!")
+                break
+            else:
+                print("Opción no válida. Por favor, intente de nuevo.")
         else:
-            print("Opción no válida. Por favor, intente de nuevo.")
+            print("Por favor, ingrese un número válido.")
