@@ -9,8 +9,13 @@ def juego_de_caballo():
     inicio_y = random.randint(0, 7)
     print(f"Posición inicial del caballo: ({inicio_x}, {inicio_y})")
 
-    tablero_visual = TableroVisual()
-    tablero_visual.ejecutar(inicio_x, inicio_y)
+    # Preguntar al usuario si desea continuar con el juego
+    continuar = input("¿Desea iniciar el juego desde esta posición? (s/n): ").strip().lower()
+    if continuar == "s":
+        tablero_visual = TableroVisual()
+        tablero_visual.ejecutar(inicio_x, inicio_y)
+    else:
+        print("Juego del caballo cancelado.")
 
 def juego_de_reinas():
     print("¡Bienvenido al problema de las n-reinas!")
